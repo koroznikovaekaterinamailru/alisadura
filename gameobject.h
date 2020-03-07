@@ -8,7 +8,7 @@ class GameObject
     public:      
         ~GameObject();//деструктор класса
         GameObject(std::string name);//конструктор класса (получаем на вход имя объекта)
-        std::vector<ComponentType*>; //все элементы будут одинакового размера
+        std::vector<Component*>; //все элементы будут одинакового размера
 
         void setPosition(int x, int y); //эта функция устанавливает положение GameObject
 
