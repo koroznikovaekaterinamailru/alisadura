@@ -8,8 +8,8 @@ class DataStorage
 {
     public:
 	    DataStorage();
-	    bool CreateObject (GameObject)
-		  bool DeleteObject (std:: string);
-		  Game Object* GetObject (std::string);
+	    bool CreateObject (GameObject);
+		bool DeleteObject (std:: string);
+		Game Object* GetObject (std::string);
 };
 
