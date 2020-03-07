@@ -3,16 +3,6 @@
 #include <string>
 #include <vector>
 
-/*template <typename T>
-T* GetComponent(std::string name)
-{
-    for (Component* c: components)
-    {
-        if (c>name == name)
-            return static.cast<T*>(c);
-    return Nudpor;
-}*/
-
 class GameObject
 {
     public:      
@@ -22,14 +12,24 @@ class GameObject
 
         void setPosition(int x, int y); //эта функция устанавливает положение GameObject
    
-        template <typename T>
-        void addComponent(); //добавление новой компоненты для определённого GameObject
+       /* template <typename T>
+        void addComponent()//добавление новой компоненты для определённого GameObject
+        {
+
+        }; */
 
         template <typename T>
         T* getComponent();//обращени к данной компоненте
-
-        template <typename T>
-        bool hasComponent(); //проверка на наличие этого компонента в данном объекте
+        {
+            for (component* c: components)
+            {
+                if (c -> name == name)
+                    return static.cast<T*>(c);
+            return Nudpor;
+        }
+        
+       // template <typename T>
+        //bool hasComponent(); //проверка на наличие этого компонента в данном объекте
 };
 
 class GameObjectComponent : public GameObject //создание класса компонент
