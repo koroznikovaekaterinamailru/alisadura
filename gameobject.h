@@ -2,10 +2,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <typeinfo>
 
 class GameObject
-    {
+{
     public:
        
         ~GameObject();//деструктор класса
@@ -19,7 +18,6 @@ class GameObject
 	    public:
 	        GameObjectComponent();
 	        std::string name = "";
-
 	    };
 
 	    template <typename ComponentType>
@@ -30,69 +28,50 @@ class GameObject
 
         template <typename ComponentType>
         bool hasComponent(); //проверка на наличие этого компонента в данном объекте
+};
 
-        //далее все функции регистрируют/удаляют компоненты из объектов???????
-        void registerObjectScript(GameObjectComponent* script);
-        void unregisterObjectScript(GameObjectComponent* script);
-
-        void registerObjectRenderer(GameObjectComponent* renderer);
-        void unregisterObjectRenderer(GameObjectComponent* renderer);
-
-        void registerObjectCollider(GameObjectComponent* collider);
-        void unregisterObjectCollider(GameObjectComponent* collider);
-
-        void registerObjectPhysicalBody(GameObjectComponent* physBody);
-        void unregisterObjectPhysicalBody(GameObjectComponent* physBody);
-    };
-
-
-    class PhysicalBody : public GameObjectComponent
-    {
+class Body : public GameObjectComponent //материальные объекты
+{
     public:
-        PhysicalBody();
-        ~PhysicalBody();
+        Body();
+        ~Body();
         //добавить параметры этого объекта ()
-        float mass = ;
-	};
+        float mass;
+        float velocity;
+};
 
-
-
-	class Renderer : public GameObjectComponent
-    {
+class Renderer : public GameObjectComponent //отрисовка
+{
     public:
     	Renderer();
     	~Renderer();
     	//добавить параметры этого объекта ()
-    };
+};
 
-    class Collider : public GameObjectComponent
-    {
+class Collider : public GameObjectComponent //взаимодействие между объектами
+{
     public:
     	Collider();
     	~Collider();
     	//добавить параметры этого объекта ()
-    }
+}
 
-    class Script //че-то пока непонятно что с этим делать
+class Script //пока непонятно, что с этим делать
 
+template <typename ComponentType>
+void GameObject::addComponent()
+{
+    //здесь будет функция которая добавляет компоненты к объектам
+}
 
+template <typename ComponentType>
+ComponentType* GameObject::getComponent()
+{
+   //обращение к данной компоненте
+}
 
-
-    template <typename ComponentType>
-    void GameObject::addComponent()
-    {
-        //здесь будет функция которая добавляет компоненты к объектам
-    }
-
-
-    template <typename ComponentType>
-    ComponentType* GameObject::getComponent()
-    {
-       //обращение к данной компоненте
-    }
-
-    template <typename ComponentType>
-    bool GameObject::hasComponent()
-    {
-    	//проверка наличия этой компоненты у объекта
-    }
+template <typename ComponentType>
+bool GameObject::hasComponent()
+{
+	//проверка наличия этой компоненты у объекта
+}
