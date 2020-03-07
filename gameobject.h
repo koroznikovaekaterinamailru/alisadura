@@ -5,23 +5,48 @@
 
 class GameObject
 {
-    public:
-       
+    public:      
         ~GameObject();//деструктор класса
         GameObject(std::string name);//конструктор класса (получаем на вход имя объекта)
-	std::vector<ComponentType*>; //все элементы будут одинакового размера
+        std::vector<ComponentType*>; //все элементы будут одинакового размера
 
         void setPosition(int x, int y); //эта функция устанавливает положение GameObject
 
         template <typename ComponentType>//это шаблон
-	    class GameObjectComponent //создание класса компонент
-	    {
-	    public:
-	        GameObjectComponent();
-	        std::string name = "";
-	    };
+        class GameObjectComponent //создание класса компонент
+        {
+        public:
+            GameObjectComponent();
+            virtual ~Component();
+            std::string name = "";
+            class Body //материальные объекты
+            {
+                public:
+                    Body();
+                    ~Body();
+                    //добавить параметры этого объекта ()
+                    float mass;
+                    float velocity;
+            };
 
-	    template <typename ComponentType>
+            class Renderer : public GameObjectComponent //отрисовка
+            {
+                public:
+                    Renderer();
+                    ~Renderer();
+                    //добавить параметры этого объекта ()
+            };
+
+            class Collider : public GameObjectComponent //взаимодействие между объектами
+            {
+                public:
+                    Collider();
+                    ~Collider();
+                    //добавить параметры этого объекта ()
+            };
+        };
+
+        template <typename ComponentType>
         void addComponent(); //добавление новой компоненты для определённого GameObject
 
         template <typename ComponentType>
@@ -30,34 +55,6 @@ class GameObject
         template <typename ComponentType>
         bool hasComponent(); //проверка на наличие этого компонента в данном объекте
 };
-
-class Body : public GameObjectComponent //материальные объекты
-{
-    public:
-        Body();
-        ~Body();
-        //добавить параметры этого объекта ()
-        float mass;
-        float velocity;
-};
-
-class Renderer : public GameObjectComponent //отрисовка
-{
-    public:
-    	Renderer();
-    	~Renderer();
-    	//добавить параметры этого объекта ()
-};
-
-class Collider : public GameObjectComponent //взаимодействие между объектами
-{
-    public:
-    	Collider();
-    	~Collider();
-    	//добавить параметры этого объекта ()
-}
-
-class Script //пока непонятно, что с этим делать
 
 template <typename ComponentType>
 void GameObject::addComponent()
@@ -74,5 +71,5 @@ ComponentType* GameObject::getComponent()
 template <typename ComponentType>
 bool GameObject::hasComponent()
 {
-	//проверка наличия этой компоненты у объекта
+    //проверка наличия этой компоненты у объекта
 }
