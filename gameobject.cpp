@@ -17,8 +17,6 @@ class GameObject: public GameObjectComponent
         GameObject();//конструктор класса (получаем на вход имя объекта)
 
         void setPosition(int x, int y); //эта функция устанавливает положение GameObject
-        std::vector<GameObjectComponent*> components; //все элементы будут одинакового размера
-
 
 
         template <typename T>
@@ -40,6 +38,9 @@ class GameObject: public GameObjectComponent
                 return NULL; 
             } 
         };    
+
+    private:
+        std::vector<GameObjectComponent*> components; 
 };
 
 class Body : public GameObjectComponent //материальные объекты
@@ -68,9 +69,9 @@ class Collider : public GameObjectComponent //взаимодействие ме�
         //добавить параметры этого объекта ()
 };
 
-int main()
+
+class Script  : public GameObjectComponent
 {
-    
-    std::cout << '6'; 
-    return 0;
-}
+    public:
+        virtual void update() = 0;
+};
