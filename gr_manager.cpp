@@ -1,76 +1,92 @@
-#ifndef GRAPHICSMANAGER_H
-#define GRAPHICSMANAGER_H
-#include <SFML/Window.hpp>
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 #include <vector>
-#include "game_object.h"
 
-class GameObject;
-
-
-class GraphicsManager
+class GameObjectComponent//создание класса компонент
 {
     public:
+        GameObjectComponent();
+        virtual ~GameObjectComponent() = 0;
+        std::string name;
+};
 
-        bool addObject(GameObjectComponent* remove_renderer);
-        bool removeObject(GameObjectComponent* add_renderer);
-        void drawAllObjects(sf::RenderWindow& window);
+class GameObject: public GameObjectComponent
+{
+    public:      
+        ~GameObject();//деструктор класса
+        GameObject();//конструктор класса (получаем на вход имя объекта)
+
+
+        template <typename T>
+        bool addComponent()//добавление новой компоненты для определённого GameObject 
+        {
+            T* obj = new T;
+            GameObjectComponent : append(obj);
+        };
+
+        template <typename T>
+        T* getComponent()//обращение к данной компоненте
+        {
+            for (GameObjectComponent* c: components)
+            {
+                if (c -> name == name)            
+                {
+                    return static_cast<T*>(c);                   
+                }
+                return NULL; 
+            } 
+        }; 
+        
+        template <typename T>
+        bool removeComponent()
+        {
+            for (int i = 0; i < components.size(); i++)
+            {
+                if (components[i]->name == name)
+                {
+                    delete components[i];
+                    components.erase(components.begin() + i);
+                    return true;
+                }
+                return false;
+            }
+        }
+    
+    private:
+        std::vector<GameObjectComponent*> components; 
+};
+
+class Body : public GameObjectComponent //материальные объекты
+{
+    public:
+        Body();
+        ~Body();
+        //добавить параметры этого объекта ()
+        float mass;
+        float velocity;
+};
+
+class Renderer : public GameObjectComponent //отрисовка
+{
+    public:
+        Renderer();
+        void draw(sf::RenderWindow& window);
+        void loadTexture(std::string texture_name);
 
     private:
-
-        GraphicsManager() {}
-        //std::map<std::string, GameObject*> drawable_obj;
-                std::vector<Renderer*> drawable_obj; 
-        sf::RenderWindow* window;
+        sf::Texture texture;
+        sf::Sprite sprite;
 };
 
-bool GraphicsManager::addObject(GameObjectComponent* add_renderer)
+class Collider : public GameObjectComponent //взаимодействие между объектами
 {
-    /*  if(drawable_obj[name] = obj)
-    {
-        return true;
-    }
-    return false;*/
-        try
-    {
-        drawable_obj.push_back(static_cast<Renderer*>(add_renderer));
-        return true;
-    }
-    catch(...)
-    {
-        return false;
-    }
-
+    public:
+        Collider();
+        ~Collider();
+        //добавить параметры этого объекта ()
 };
 
-  bool GraphicsManager::removeObject(GameObjectComponent* remove_renderer)
-{
-/*  if(drawable_obj.count(name) == 1)
-    {
-        delete drawable_obj[name];
-        drawable_obj.erase(name);
-        return true;
-    }
-    return false;*/
-    for (int i = 0; i < drawable_obj.size(); i++)
-    {
-        if (drawable_obj[i] == remove_renderer)
-        {
-            drawable_obj.erase(drawable_obj.begin() + i);
-            return true;
-        }
-    }
-    return false;
-};
-
-void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
-{
-    for (Renderer* renderer : drawable_obj)
-    {
-        renderer-> draw(window);
-    }
-    window.display();
-};
-
-#endif // DRAWMANAGER_H
+#endif // GAMEOBJECT_H
