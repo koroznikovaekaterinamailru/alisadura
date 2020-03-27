@@ -6,7 +6,7 @@
 int main()
 {
 	GameObject TestObject;
-	test.addComponent<TestType>();
+	TestObject.addComponent<TestType>();
 
 	TestType* TestComponent = TestObject.getComponent<TestType>();
 	std::cout<<TestObject.removeComponent<TestType>() <<std::endl;
