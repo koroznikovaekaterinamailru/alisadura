@@ -1,3 +1,5 @@
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
@@ -6,8 +8,9 @@
 class GameObjectComponent//создание класса компонент
 {
     public:
-    GameObjectComponent();
-    std::string name;
+        GameObjectComponent();
+        virtual ~GameObjectComponent() = 0;
+        std::string name;
 };
 
 class GameObject: public GameObjectComponent
@@ -15,8 +18,6 @@ class GameObject: public GameObjectComponent
     public:      
         ~GameObject();//деструктор класса
         GameObject();//конструктор класса (получаем на вход имя объекта)
-
-        void setPosition(int x, int y); //эта функция устанавливает положение GameObject
 
 
         template <typename T>
@@ -37,10 +38,12 @@ class GameObject: public GameObjectComponent
                 }
                 return NULL; 
             } 
-        };    
+        }; 
+        void registerObjectRenderer(GameObjectComponent* renderer);
+        void unregisterObjectRenderer(GameObjectComponent* renderer);   
 
     private:
-        std::vector<GameObjectComponent*> components; 
+        std::vector<GameObjectComponent*>::iterator components; 
 };
 
 class Body : public GameObjectComponent //материальные объекты
@@ -57,8 +60,12 @@ class Renderer : public GameObjectComponent //отрисовка
 {
     public:
         Renderer();
-        ~Renderer();
-        //добавить параметры этого объекта ()
+        void draw(sf::RenderWindow& window);
+        void loadTexture(std::string texture_name);
+
+    private:
+        sf::Texture texture;
+        sf::Sprite sprite;
 };
 
 class Collider : public GameObjectComponent //взаимодействие между объектами
@@ -69,9 +76,4 @@ class Collider : public GameObjectComponent //взаимодействие ме�
         //добавить параметры этого объекта ()
 };
 
-
-class Script  : public GameObjectComponent
-{
-    public:
-        virtual void update() = 0;
-};
+#endif // GAMEOBJECT_H
