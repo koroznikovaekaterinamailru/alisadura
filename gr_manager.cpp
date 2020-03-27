@@ -1,3 +1,6 @@
+#ifndef GRAPHICSMANAGER_H
+#define GRAPHICSMANAGER_H
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -5,62 +8,69 @@
 
 class GameObject;
 
-/*class DrawableObj
-{
-  public:
-      virtual void draw();  
-      DrawableObj();
-      ~DrawableObj();
-};*/
 
 class GraphicsManager
 {
-	public:
+    public:
 
-		sf::RenderWindow* getWindow();
-
-	    void drawAllObjects(sf::RenderWindow& window);
-	    bool addObject(std::string name , GameObject* obj);
-	    bool removeObject(std::string name);
-	    void clear();
+        bool addObject(GameObjectComponent* remove_renderer);
+        bool removeObject(GameObjectComponent* add_renderer);
+        void drawAllObjects(sf::RenderWindow& window);
 
     private:
 
         GraphicsManager() {}
-        std::map<std::string, GameObject*> drawable_obj;
+        //std::map<std::string, GameObject*> drawable_obj;
+                std::vector<Renderer*> drawable_obj; 
         sf::RenderWindow* window;
 };
 
-sf::RenderWindow* GraphicsManager::getWindow()
+bool GraphicsManager::addObject(GameObjectComponent* add_renderer)
 {
-    return window;
-}
-
-void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
-{
-    for (auto& object : drawable_obj)
-    {
-        object.second->getComponent<Renderer>()->draw(window);
-    }
-    window.display();
-};
-
-bool GraphicsManager::addObject(std::string name , GameObject* obj)
-{
-    if(drawable_obj[name] = obj)
+    /*  if(drawable_obj[name] = obj)
     {
         return true;
     }
-    return false;
+    return false;*/
+        try
+    {
+        drawable_obj.push_back(static_cast<Renderer*>(add_renderer));
+        return true;
+    }
+    catch(...)
+    {
+        return false;
+    }
+
 };
 
-bool GraphicsManager::removeObject(std::string name)
+  bool GraphicsManager::removeObject(GameObjectComponent* remove_renderer)
 {
-    if(drawable_obj.count(name) == 1)
+/*  if(drawable_obj.count(name) == 1)
     {
         delete drawable_obj[name];
         drawable_obj.erase(name);
         return true;
     }
+    return false;*/
+    for (int i = 0; i < drawable_obj.size(); i++)
+    {
+        if (drawable_obj[i] == remove_renderer)
+        {
+            drawable_obj.erase(drawable_obj.begin() + i);
+            return true;
+        }
+    }
     return false;
 };
+
+void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
+{
+    for (Renderer* renderer : drawable_obj)
+    {
+        renderer-> draw(window);
+    }
+    window.display();
+};
+
+#endif // DRAWMANAGER_H
