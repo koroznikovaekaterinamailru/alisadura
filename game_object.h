@@ -4,24 +4,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "component.h"
 
-class GameObjectComponent//создание класса компонент
-{
-    public:
-        GameObjectComponent();
-        virtual ~GameObjectComponent() = 0;
-        std::string name;
-};
-
-class GameObject: public GameObjectComponent
+class GameObject
 {
     public:      
         ~GameObject();//деструктор класса
         GameObject();//конструктор класса (получаем на вход имя объекта)
 
-
+        void setPosition(int x, int y);
         template <typename T>
-        T* addComponent()//добавление новой компоненты для определённого GameObject 
+        bool addComponent()//добавление новой компоненты для определённого GameObject 
         {
             T* obj = new T;
             GameObjectComponent : append(obj);
@@ -39,41 +32,25 @@ class GameObject: public GameObjectComponent
                 return NULL; 
             } 
         }; 
-        void registerObjectRenderer(GameObjectComponent* renderer);
-        void unregisterObjectRenderer(GameObjectComponent* renderer);   
-
+        
+        template <typename T>
+        bool removeComponent()
+        {
+            for (int i = 0; i < components.size(); i++)
+            {
+                if (components[i]->name == name)
+                {
+                    delete components[i];
+                    components.erase(components.begin() + i);
+                    return true;
+                }
+                return false;
+            }
+        }
+    
     private:
-        std::vector<GameObjectComponent*>::iterator components; 
-};
-
-class Body : public GameObjectComponent //материальные объекты
-{
-    public:
-        Body();
-        ~Body();
-        //добавить параметры этого объекта ()
-        float mass;
-        float velocity;
-};
-
-class Renderer : public GameObjectComponent //отрисовка
-{
-    public:
-        Renderer();
-        void draw(sf::RenderWindow& window);
-        void loadTexture(std::string texture_name);
-
-    private:
-        sf::Texture texture;
-        sf::Sprite sprite;
-};
-
-class Collider : public GameObjectComponent //взаимодействие между объектами
-{
-    public:
-        Collider();
-        ~Collider();
-        //добавить параметры этого объекта ()
+        std::vector<GameObjectComponent*> components; 
+        std::string name;
 };
 
 #endif // GAMEOBJECT_H
