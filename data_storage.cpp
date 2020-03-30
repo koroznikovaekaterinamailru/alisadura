@@ -1,12 +1,15 @@
 #include <SFML/Graphics.hpp>
 #include <iostrem>
+#include <fstream>
 #include <vector>
-#include <SFML/Graphics.hpp>
 
 class DataStorage
 {
     public:
 	    DataStorage();
-	    Game Object* GetObject (std::string);
+	    bool createObject(GameObject game_object);
+		bool deleteObject(std::string name);
+		Game Object* GetObject (std::string name);
+	private:
+		std::vector<GameObject> objects;
 };
-
