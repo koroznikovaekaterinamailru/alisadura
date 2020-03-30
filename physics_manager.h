@@ -22,6 +22,7 @@ void PhysicsManager::addCollider(GameObjectComponent* add_collider)
     colliding_obj.push_back(static_cast <Collider*> (add_collider));
 }
 
+
 void PhysicsManager::removeCollider(GameObjectComponent* remove_collider)
 {
     for(int i = 0 ; i < colliding_obj.size() ; i++)
