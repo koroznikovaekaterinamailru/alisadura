@@ -10,42 +10,31 @@ class GraphicsManager
 {
     public:
 
-        bool addObject(GameObjectComponent* remove_renderer);
-        bool removeObject(GameObjectComponent* add_renderer);
+        void addObject(GameObjectComponent* remove_renderer);
+        void removeObject(GameObjectComponent* add_renderer);
         void drawAllObjects(sf::RenderWindow& window);
 
     private:
 
         GraphicsManager() {}
-        //std::map<std::string, GameObject*> drawable_obj;
-                std::vector<Renderer*> drawable_obj; 
+        std::vector<Renderer*> drawable_obj; 
         sf::RenderWindow* window;
 };
 
-bool GraphicsManager::addObject(GameObjectComponent* add_renderer)
+void GraphicsManager::addObject(GameObjectComponent* add_renderer)
 {
-    try
-    {
-        drawable_obj.push_back(static_cast<Renderer*>(add_renderer));
-        return true;
-    }
-    catch(...)
-    {
-        return false;
-    }
+    drawable_obj.push_back(static_cast<Renderer*>(add_renderer));
 };
 
-  bool GraphicsManager::removeObject(GameObjectComponent* remove_renderer)
+void GraphicsManager::removeObject(GameObjectComponent* remove_renderer)
 {
     for (int i = 0; i < drawable_obj.size(); i++)
     {
         if (drawable_obj[i] == remove_renderer)
         {
             drawable_obj.erase(drawable_obj.begin() + i);
-            return true;
         }
     }
-    return false;
 };
 
 void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
