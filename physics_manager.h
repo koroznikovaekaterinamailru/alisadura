@@ -2,52 +2,65 @@
 #define PHYSICSMANAGER_H
 #include <vector>
 #include "game_object.h"
+#include "component.h"
 #include <iostream>
 
 class PhysicsManager
 {
     public:
-        void addCollider(GameObjectComponent* add_collider);
-        void removeCollider(GameObjectComponent* remove_collider);
-        void collision_of_two(Collider* object_1 , Collider* object_2);
-        void all_collisions();
+        void addCollider(GameObjectComponent* addingOfCollider);
+        void removeCollider(GameObjectComponent* removingOfCollider);
+        bool isCollision(Collider* object1 , Collider* object2);
+        void allCollisions();
 
     private:
         PhysicsManager() {}
-        std::vector <Collider*> colliding_obj;
+        std::vector <Collider*> collidingObjects;
 };
 
-void PhysicsManager::addCollider(GameObjectComponent* add_collider)
+void PhysicsManager::addCollider(GameObjectComponent* addingOfCollider)
 {
-    colliding_obj.push_back(static_cast <Collider*> (add_collider));
+    collidingObjects.push_back(static_cast <Collider*> (addingOfCollider));
 }
 
-
-void PhysicsManager::removeCollider(GameObjectComponent* remove_collider)
+void PhysicsManager::removeCollider(GameObjectComponent* removingOfCollider)
 {
-    for(int i = 0 ; i < colliding_obj.size() ; i++)
+    for(int i = 0 ; i < collidingObjects.size() ; i++)
     {
-        if(colliding_obj[i] == remove_collider)
+        if(collidingObjects[i] == removingOfCollider)
         {
-            colliding_obj.erase(colliding_obj.begin() + i);
+            collidingObjects.erase(collidingObjects.begin() + i);
         }
     }
 }
 
-void PhysicsManager::collision_of_two(Collider* object_1 , Collider* object_2)
-{   
+bool PhysicsManager::isCollision(Collider* object1 , Collider* object2)
+{       
+    bool XColl=false;
+    bool YColl=false;
+    if(((*object1).x + (*object1).width == (*object2).x) || ((*object2).x + (*object2).width == (*object1).x)) 
+        XColl = true;
 
+    if (((*object1).y + (*object1).height == (*object2).y) || ((*object2).y + (*object2).height == (*object2).y))
+    {
+        YColl = true;
+    }
+    if (XColl&YColl)
+    {
+        return true;
+    }
+    return false;
 }
 
-void PhysicsManager::all_collisions()
+void PhysicsManager::allCollisions()
 {
-    for (int i = 0; i < colliding_obj.size(); i++)
+    for (int i = 0; i < collidingObjects.size(); i++)
     {
-        for (int j = 0; j < colliding_obj.size(); j++)
+        for (int j = 0; j < collidingObjects.size(); j++)
         {
             if (i > j)
             {
-                collision_of_two(colliding_obj[i], colliding_obj[j]);
+                isCollision(collidingObjects[i], collidingObjects[j]);
             }
         }
     }
