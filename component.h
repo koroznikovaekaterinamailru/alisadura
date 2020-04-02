@@ -40,7 +40,7 @@ class Collider: public GameObjectComponent
         float x;
         float y;
     private:
-        std::vector<std::vector<float>> object_coordinate; //(координаты прямоугольника,в котором сожержится объект)
+        std::vector<std::vector <float> > object_coordinate; //(координаты прямоугольника,в котором сожержится объект)
 };
 
 class Script : public GameObjectComponent
