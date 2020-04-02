@@ -30,12 +30,17 @@ class Renderer : public GameObjectComponent //отрисовка
         sf::Sprite sprite;
 };
 
-class Collider : public GameObjectComponent //взаимодействие между объектами
-{
+class Collider: public GameObjectComponent
+{   
     public:
         Collider();
-        ~Collider();
-        //добавить параметры этого объекта ()
+        bool isCollision();
+        float width;//ширина прямоугольника,в котором сожержится объект
+        float height;//высота прямоугольника,в котором сожержится объект
+        float x;
+        float y;
+    private:
+        std::vector<std::vector<float>> object_coordinate; //(координаты прямоугольника,в котором сожержится объект)
 };
 
 class Script : public GameObjectComponent
