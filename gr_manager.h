@@ -15,8 +15,6 @@ class GraphicsManager
         void drawAllObjects(sf::RenderWindow& window);
 
     private:
-
-        GraphicsManager() {}
         std::vector<Renderer*> drawable_obj; 
         sf::RenderWindow* window;
 };
