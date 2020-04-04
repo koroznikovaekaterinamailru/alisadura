@@ -14,7 +14,6 @@ class PhysicsManager
         void allCollisions();
 
     private:
-        PhysicsManager() {}
         std::vector <Collider*> collidingObjects;
 };
 
