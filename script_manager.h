@@ -14,7 +14,6 @@ class ScriptManager
 	    void removeScript(GameObjectComponent* remove_script);
 
 	private:
-	    ScriptManager() {}
 	    std::vector<Script*> scripts;
 };
 
