@@ -9,9 +9,6 @@
 class GameObject
 {
     public:      
-        ~GameObject();//деструктор класса
-        GameObject();//конструктор класса (получаем на вход имя объекта)
-
         void setPosition(int x, int y);
         template <typename T>
         bool addComponent()//добавление новой компоненты для определённого GameObject 
