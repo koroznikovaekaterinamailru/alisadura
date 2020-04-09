@@ -17,6 +17,7 @@ class Singleton
         //ScriptManager scriptmanager;
         float dt;
     private:
+        Singleton() {}
         static Singleton* instance;
 };
 
