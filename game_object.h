@@ -5,16 +5,21 @@
 #include <string>
 #include <vector>
 #include "component.h"
+#include "gr_manager.h"
+#include "script_manager.h"
+#include "physics_manager.h"
 
 class GameObject
 {
     public:      
+
         void setPosition(int x, int y);
         template <typename T>
         bool addComponent()//добавление новой компоненты для определённого GameObject 
         {
             T* obj = new T;
-            GameObjectComponent : append(obj);
+            components.push_back(obj);
+            components[components.size() - 1]->owner = this;
         };
 
         template <typename T>
