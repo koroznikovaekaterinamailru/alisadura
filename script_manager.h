@@ -9,13 +9,24 @@
 class ScriptManager
 {
 	public:
+        static ScriptManager* getInstance();        
 	    void update(float dt);
-	    void addScript(GameObjectComponent* add_script);
-	    void removeScript(GameObjectComponent* remove_script);
+	    void addScript(GameObjectComponent* addingOfScript);
+	    void removeScript(GameObjectComponent* removingOfScript);
 
 	private:
 	    std::vector<Script*> scripts;
+        static ScriptManager* instance;
 };
+
+ScriptManager* ScriptManager::getInstance()
+{
+    if (!instance)
+        instance = new ScriptManager();
+    return instance;
+}
+
+ScriptManager* ScriptManager::instance = NULL;
 
 void ScriptManager::update(float dt)
 {
@@ -25,16 +36,16 @@ void ScriptManager::update(float dt)
     }
 };
 
-void ScriptManager::addScript(GameObjectComponent* add_script)
+void ScriptManager::addScript(GameObjectComponent* addingOfScript)
 {
-    scripts.push_back(static_cast<Script*>(add_script));
+    scripts.push_back(static_cast<Script*>(addingOfScript));
 }
 
-void ScriptManager::removeScript(GameObjectComponent* remove_script)
+void ScriptManager::removeScript(GameObjectComponent* removingOfScript)
 {
     for (int i = 0; i < scripts.size(); i++)
     {
-        if (scripts[i] == remove_script)
+        if (scripts[i] == removingOfScript)
         {
             scripts.erase(scripts.begin() + i);
         }
