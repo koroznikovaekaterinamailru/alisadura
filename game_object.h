@@ -8,6 +8,7 @@
 #include "gr_manager.h"
 #include "script_manager.h"
 #include "physics_manager.h"
+#include "singleton.h"
 
 class GameObject
 {
