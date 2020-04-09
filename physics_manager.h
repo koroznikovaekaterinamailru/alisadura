@@ -2,12 +2,12 @@
 #define PHYSICSMANAGER_H
 #include <vector>
 #include "game_object.h"
-#include "component.h"
 #include <iostream>
 
 class PhysicsManager
 {
     public:
+        static PhysicsManager* getInstance();
         void addCollider(GameObjectComponent* addingOfCollider);
         void removeCollider(GameObjectComponent* removingOfCollider);
         bool isCollision(Collider* object1 , Collider* object2);
@@ -15,7 +15,18 @@ class PhysicsManager
 
     private:
         std::vector <Collider*> collidingObjects;
+        static PhysicsManager* instance;
 };
+
+PhysicsManager* PhysicsManager::instance = NULL;
+
+PhysicsManager* PhysicsManager::getInstance(){
+
+    if(!instance){
+        instance = new PhysicsManager;
+    }
+    return instance;
+}
 
 void PhysicsManager::addCollider(GameObjectComponent* addingOfCollider)
 {
