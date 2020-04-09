@@ -5,8 +5,7 @@
 #include <string>
 #include <vector>
 
-namespace girls
-{
+
 
     class GameObject;
 
@@ -25,12 +24,14 @@ namespace girls
             Renderer();
             void draw(sf::RenderWindow& window)
             {
-                sprite.setPosition( owner->position[0], owner->position[1] );
+                int x;
+                int y;
+                sprite.setPosition(x, y);
                 window.draw(sprite);
             };
             void loadTexture(std::string texture_name)
             {
-                texture.loadFromFile(texturename);
+                texture.loadFromFile(texture_name);
             };
             void createSprite()
             {
@@ -65,6 +66,6 @@ namespace girls
             Script();
             virtual void update(float dt) {}
     };
-}
+
 
 #endif // COMPONENT_H
