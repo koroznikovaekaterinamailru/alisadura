@@ -1,25 +1,22 @@
-objectAPI:
-	void createObject(std::string name)
-	GameObject& getObject(std::string name)
-	void deleteObject(std::string name)
+#ifndef API_H
+#define API_H
 
-GameObject:    
-	void setPosition(int x, int y); 
-	template <typename T>
-	T* addComponent()
-	T* getComponent()
-	T* removeComponent()
+namespace girls
+{
+	class GraphicsManager;
+	class PhysicsManager;
+	class ScriptManager;
+	class Singleton;
+	class DataStorage;
+	class GameObject;
+		
+	class GameObjectComponent;
+	class Renderer;
+		
 
-GameObjectComponent:
+	class Collider;
+	class Script;
+		
+}
 
-	Renderer:
-		void draw(sf::RenderWindow& window);
-	    void loadTexture(std::string texture_name);   
-	    void createSprite();
-
-	Collider:
-	    bool isCollision();
-	    void allCollisions();
-	        
-	Script:
-		virtual void update(float dt);
+#endif // API_H
