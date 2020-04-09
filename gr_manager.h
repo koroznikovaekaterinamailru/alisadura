@@ -9,26 +9,34 @@
 class GraphicsManager
 {
     public:
-
-        void addObject(GameObjectComponent* remove_renderer);
-        void removeObject(GameObjectComponent* add_renderer);
+        static GraphicsManager* getInstance();
+        void addObject(GameObjectComponent* addingOfRenderer);
+        void removeObject(GameObjectComponent* removingOfRenderer);
         void drawAllObjects(sf::RenderWindow& window);
 
     private:
         std::vector<Renderer*> drawable_obj; 
         sf::RenderWindow* window;
+        static GraphicsManager* instance;
 };
 
-void GraphicsManager::addObject(GameObjectComponent* add_renderer)
+GraphicsManager* GraphicsManager::getInstance()
 {
-    drawable_obj.push_back(static_cast<Renderer*>(add_renderer));
+    if (!instance)
+        instance = new GraphicsManager();
+    return instance;
+}
+
+void GraphicsManager::addObject(GameObjectComponent* addingOfRenderer)
+{
+    drawable_obj.push_back(static_cast<Renderer*>(addingOfRenderer));
 };
 
-void GraphicsManager::removeObject(GameObjectComponent* remove_renderer)
+void GraphicsManager::removeObject(GameObjectComponent* removingOfRenderer)
 {
     for (int i = 0; i < drawable_obj.size(); i++)
     {
-        if (drawable_obj[i] == remove_renderer)
+        if (drawable_obj[i] == removingOfRenderer)
         {
             drawable_obj.erase(drawable_obj.begin() + i);
         }
@@ -43,5 +51,7 @@ void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
     }
     window.display();
 };
+
+GraphicsManager* GraphicsManager::instance = NULL;
 
 #endif // DRAWMANAGER_H
