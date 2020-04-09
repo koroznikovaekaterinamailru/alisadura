@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "game_object.h"
-#include <vector>
 #include <map>
 
 class GameObject;
@@ -14,9 +13,21 @@ class DataStorage
 	    bool createObject(std::string name, GameObject* object);
 		bool deleteObject(std::string name);
 		GameObject* getObject(std::string name);
+        static DataStorage* getInstance();
 	private:
 		std::map<std::string, GameObject*> objects;
+        static DataStorage* instance;
 };
+
+DataStorage* DataStorage::getInstance(){
+    
+    if(!instance){
+        instance = new DataStorage();
+    }
+    return instance;
+};
+
+DataStorage* DataStorage::instance = NULL;
 
 bool DataStorage::createObject(std::string name , GameObject* object)
 {
