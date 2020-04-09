@@ -11,7 +11,6 @@ class GameObject;
 class DataStorage
 {
     public:
-	    DataStorage();
 	    bool createObject(std::string name, GameObject* object);
 		bool deleteObject(std::string name);
 		GameObject* getObject(std::string name);
