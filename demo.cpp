@@ -1,24 +1,37 @@
 #include <SFML/Graphics.hpp>
 #include "gr_manager.h"
 #include "data_storage.h"
+#include "data_storage.cpp"
+#include "gr_manager.cpp"
+
+const float dt = 0.5;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(600, 600), "Some game");
-    DataStorage* data_storage = DataStorage::getInstance();
+    sf::RenderWindow window(sf::VideoMode(480, 720), "girrrrrls");
+    DataStorage* dataStorage = DataStorage::getInstance();
     GraphicsManager* GrManager = GraphicsManager::getInstance();
+    ScriptManager* ScrManager = ScriptManager::getInstance();
+    PhysicsManager* PhManager = PhysicsManager::getInstance();
 
-    GameObject player;
-    player.addComponent<Renderer>();
-    player.getComponent<Renderer>()->loadTexture("bl3.png");
-    player.getComponent<Renderer>()->createSprite();
-    player.setPosition(300,300);
-    data_storage->createObject("player", &player);
+    GameObject hero;
+    hero.addComponent<Renderer>();
+    hero.getComponent<Renderer>()->loadTexture("hero.jpg");
+    hero.getComponent<Renderer>()->createSprite();
+    hero.setPosition(300,300);
+    dataStorage->createObject("hero", &hero);
 
+    GameObject monster;
+    monster.addComponent<Renderer>();
+    monster.getComponent<Renderer>()->loadTexture("monster.jpg");
+    monster.getComponent<Renderer>()->createSprite();
+    monster.setPosition(600,100);
+    dataStorage->createObject("monster", &monster);
 
     sf::Event event;
     while (window.isOpen())
 	{
+        ScrManager->update(dt);
         window.clear(sf::Color(0,0,0));
         GrManager->drawAllObjects(window);
 
@@ -29,7 +42,7 @@ int main()
             }	   
 	    }
     }
-    delete data_storage;
+    delete dataStorage;
     delete GrManager;
     return 0;
 }
