@@ -1,8 +1,6 @@
 #ifndef PHYSICSMANAGER_H
 #define PHYSICSMANAGER_H
-#include <vector>
 #include "game_object.h"
-#include <iostream>
 
 class PhysicsManager
 {
