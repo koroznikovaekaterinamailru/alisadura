@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-
-
     class GameObject;
 
     class GameObjectComponent//создание класса компонент
