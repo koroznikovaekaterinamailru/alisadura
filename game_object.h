@@ -1,14 +1,6 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
 #include "component.h"
-#include "gr_manager.h"
-#include "script_manager.h"
-#include "physics_manager.h"
-#include "component.cpp"
-#include <typeinfo>
 
 class GameObjectComponent;
 
