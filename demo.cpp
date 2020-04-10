@@ -3,6 +3,8 @@
 #include "data_storage.h"
 #include "data_storage.cpp"
 #include "gr_manager.cpp"
+#include "script_manager.h"
+#include "script_manager.cpp"
 
 const float dt = 0.5;
 
@@ -36,11 +38,12 @@ int main()
         GrManager->drawAllObjects(window);
 
         while (window.pollEvent(event))
+	{
+            if (event.type == sf::Event::Closed)
 	    {
-            if (event.type == sf::Event::Closed){
                 window.close();
             }	   
-	    }
+	}
     }
     delete dataStorage;
     delete GrManager;
