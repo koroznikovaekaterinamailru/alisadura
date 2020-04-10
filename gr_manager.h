@@ -1,11 +1,6 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
 #include "game_object.h"
-#include "component.h"
 
 class GraphicsManager
 {
