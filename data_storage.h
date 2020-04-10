@@ -1,7 +1,5 @@
 #ifndef DATA_STORAGE_H
 #define DATA_STORAGE_H
-#include <SFML/Graphics.hpp>
-#include <iostream>
 #include "game_object.h"
 #include <map>
 
