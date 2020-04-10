@@ -1,9 +1,5 @@
 #ifndef SCRIPTS_H
 #define SCRIPTS_H
-#include <SFML/Window.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <vector>
 #include "game_object.h"
 
 class ScriptManager
