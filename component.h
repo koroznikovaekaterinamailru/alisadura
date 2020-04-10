@@ -12,8 +12,6 @@
     class GameObjectComponent//создание класса компонент
     {
         public:
-            GameObjectComponent();
-            virtual ~GameObjectComponent() = 0;
             std::string name;
             GameObject* owner;
     };
