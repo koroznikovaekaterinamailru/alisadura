@@ -7,39 +7,26 @@
 #include "gr_manager.h"
 #include "script_manager.h"
 #include "physics_manager.h"
+#include "component.cpp"
 #include <typeinfo>
 
-class GraphicsManager;
-class PhysicsManager;
+class GameObjectComponent;
 
 class GameObject
 {
     public:
-
-        void setPosition(int x, int y);
-
+        sf::Vector2f position;
+        void setPosition(int x, int y)
+        {
+            position = {x, y};
+        }
 
         template <typename T>
-        bool addComponent()//добавление новой компоненты для определённого GameObject 
+        void addComponent()//добавление новой компоненты для определённого GameObject 
         {
             T* obj = new T;
             components.push_back(obj);
             components[components.size() - 1]->owner = this;
-            /*GraphicsManager* GrManager = GraphicsManager::getInstance();
-            if(typeid(T).name() == typeid(Renderer).name())
-            {
-                GrManager->addObject(obj);
-            }
-            else if(typeid(T).name() == typeid(Script).name())
-            {
-                ScriptManager* ScriptManager = ScriptManager::getInstance();
-                ScriptManager -> addScript(obj);
-            }
-            else if(typeid(T).name() == typeid(Collider).name())
-            {
-                PhysicsManager* PhManager = PhysicsManager::getInstance();
-                PhManager -> addCollider(obj);
-            }*/
         }
 
         template <typename T>
@@ -57,7 +44,7 @@ class GameObject
         }; 
         
         template <typename T>
-        bool removeComponent()
+        void removeComponent()
         {
             std::string name = typeid(T).name();
             for (int i = 0; i < components.size(); i++)
@@ -66,9 +53,7 @@ class GameObject
                 {
                     delete components[i];
                     components.erase(components.begin() + i);
-                    return true;
                 }
-                return false;
             }
         }
     
