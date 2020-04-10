@@ -14,8 +14,7 @@ int main()
     DataStorage* dataStorage = DataStorage::getInstance();
     GraphicsManager* GrManager = GraphicsManager::getInstance();
     ScriptManager* ScrManager = ScriptManager::getInstance();
-    PhysicsManager* PhManager = PhysicsManager::getInstance();
-
+	
     GameObject hero;
     hero.addComponent<Renderer>();
     hero.getComponent<Renderer>()->loadTexture("hero.jpg");
