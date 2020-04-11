@@ -8,7 +8,7 @@ class GameObject
 {
     public:
         sf::Vector2f position;
-        void setPosition(int x, int y)
+        void setPosition(float x, float y)
         {
             position = {x, y};
         }
