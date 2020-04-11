@@ -2,8 +2,8 @@
 #define COMPONENT_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <string>
 #include <vector>
+#include <typeinfo>
 
     class GameObject;
 
@@ -17,17 +17,20 @@
     class Renderer : public GameObjectComponent //отрисовка
     {
         public:
-            Renderer();
+            Renderer()
+            {
+                name = typeid(*this).name();
+            };
             void draw(sf::RenderWindow& window)
             {
-                int x;
-                int y;
+                float x;
+                float y;
                 sprite.setPosition(x, y);
                 window.draw(sprite);
             };
-            void loadTexture(std::string texture_name)
+            void loadTexture(std::string textureName)
             {
-                texture.loadFromFile(texture_name);
+                texture.loadFromFile(textureName);
             };
             void createSprite()
             {
@@ -62,6 +65,5 @@
             Script();
             virtual void update(float dt) {}
     };
-
 
 #endif // COMPONENT_H
