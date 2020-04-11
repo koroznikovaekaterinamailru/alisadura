@@ -1,20 +1,21 @@
-#include <SFML/Graphics.hpp>
 #include "gr_manager.h"
-#include "data_storage.h"
-#include "data_storage.cpp"
 #include "gr_manager.cpp"
 #include "script_manager.h"
 #include "script_manager.cpp"
+#include "data_storage.h"
+#include "data_storage.cpp"
+
 
 const float dt = 0.5;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(480, 720), "girrrrrls");
+    sf::RenderWindow window(sf::VideoMode(720, 720), "girrrrrls");
     DataStorage* dataStorage = DataStorage::getInstance();
     GraphicsManager* GrManager = GraphicsManager::getInstance();
-    ScriptManager* ScrManager = ScriptManager::getInstance();
-	
+   // ScriptManager* ScrManager = ScriptManager::getInstance();
+  //  PhysicsManager* PhManager = PhysicsManager::getInstance();
+
     GameObject hero;
     hero.addComponent<Renderer>();
     hero.getComponent<Renderer>()->loadTexture("hero.jpg");
@@ -32,18 +33,19 @@ int main()
     sf::Event event;
     while (window.isOpen())
 	{
-        ScrManager->update(dt);
+       // ScrManager->update(dt);
         window.clear(sf::Color(0,0,0));
         GrManager->drawAllObjects(window);
+        window.display();
 
         while (window.pollEvent(event))
-	{
-            if (event.type == sf::Event::Closed)
 	    {
+            if (event.type == sf::Event::Closed){
                 window.close();
             }	   
-	}
+	    }
     }
+
     delete dataStorage;
     delete GrManager;
     return 0;
