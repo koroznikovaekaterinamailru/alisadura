@@ -49,8 +49,6 @@ void Animation::UpdateRow(int row, float deltaTime)
 
 		}
 	}
-	
-	std::cout<<currentImage.x << currentImage.y <<std::endl;
 	uvRect.left = currentImage.x*uvRect.width;
 	uvRect.top = currentImage.y*uvRect.height;
 }
@@ -73,8 +71,6 @@ void Animation::Update( float deltaTime)
 
 		}
 	}
-	
-	std::cout<<currentImage.x << currentImage.y <<std::endl;
 	uvRect.left = currentImage.x*uvRect.width;
 	uvRect.top = currentImage.y*uvRect.height;
 }
