@@ -6,8 +6,8 @@ class Animation
 public:
 	Animation(sf::Texture* texture, sf::Vector2f imageCount, float switchTime);
 	~Animation();
-	sf::IntRect uvRect;
-	void UpdateRow(int row, float deltaTime);
+	sf::IntRect Rect;
+	void UpdateRow(int row, float deltaTime, bool faceRight);
 	void Update(float deltaTime);
 
 private:
@@ -25,8 +25,8 @@ Animation::Animation(sf::Texture* texture, sf::Vector2f imageCount, float switch
 		totalTime = 0.0f;
 		currentImage.x = 0;
 
-		uvRect.width = texture->getSize().x/float(imageCount.x);
-		uvRect.height = texture->getSize().y/float(imageCount.y);
+		Rect.width = texture->getSize().x/float(imageCount.x);
+		Rect.height = texture->getSize().y/float(imageCount.y);
 	}
 
 
@@ -35,7 +35,7 @@ Animation::~Animation()
 
 }
 
-void Animation::UpdateRow(int row, float deltaTime)
+void Animation::UpdateRow(int row, float deltaTime,bool faceRight)
 {
 	currentImage.y = row;
 	totalTime += deltaTime;
@@ -49,8 +49,9 @@ void Animation::UpdateRow(int row, float deltaTime)
 
 		}
 	}
-	uvRect.left = currentImage.x*uvRect.width;
-	uvRect.top = currentImage.y*uvRect.height;
+	
+	Rect.left = currentImage.x*Rect.width;
+	Rect.top = currentImage.y*Rect.height;
 }
 
 void Animation::Update( float deltaTime)
@@ -71,8 +72,9 @@ void Animation::Update( float deltaTime)
 
 		}
 	}
-	uvRect.left = currentImage.x*uvRect.width;
-	uvRect.top = currentImage.y*uvRect.height;
+	
+	Rect.left = currentImage.x*Rect.width;
+	Rect.top = currentImage.y*Rect.height;
 }
 
 
@@ -83,14 +85,14 @@ int main()
 
 	sf::Event event;
 	sf::RectangleShape player;
-	player.setSize(sf::Vector2f(200.0f, 200.0f));
-	player.setPosition(206.0f, 206.0f);
+	player.setSize(sf::Vector2f(300.0f, 300.0f));
+	player.setPosition(76.0f, 76.0f);
 
 	sf::Texture playerTexture;
-	playerTexture.loadFromFile("images/fighter.jpg");
+	playerTexture.loadFromFile("images/explosion.png");
 	player.setTexture(&playerTexture);
 
-	Animation animation(&playerTexture, sf::Vector2f(6, 4), 0.3f);
+	Animation animation(&playerTexture, sf::Vector2f(4, 4), 0.1f);
 	float deltaTime = 0.0f;
 	sf::Clock clock;
 
@@ -104,7 +106,7 @@ int main()
 	    }
 
 		//animation.UpdateRow(0, deltaTime);
-		player.setTextureRect(animation.uvRect);
+		player.setTextureRect(animation.Rect);
 		animation.Update(deltaTime);
 
 		window.clear();
