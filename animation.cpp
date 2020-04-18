@@ -7,7 +7,8 @@ public:
 	Animation(sf::Texture* texture, sf::Vector2f imageCount, float switchTime);
 	~Animation();
 	sf::IntRect uvRect;
-	void Update(int row, float deltaTime);
+	void UpdateRow(int row, float deltaTime);
+	void Update(float deltaTime);
 
 private:
 	sf::Vector2f imageCount;
@@ -34,7 +35,7 @@ Animation::~Animation()
 
 }
 
-void Animation::Update(int row, float deltaTime)
+void Animation::UpdateRow(int row, float deltaTime)
 {
 	currentImage.y = row;
 	totalTime += deltaTime;
@@ -45,6 +46,31 @@ void Animation::Update(int row, float deltaTime)
 		if (currentImage.x >= imageCount.x)
 		{
 			currentImage.x = 0;
+
+		}
+	}
+	
+	std::cout<<currentImage.x << currentImage.y <<std::endl;
+	uvRect.left = currentImage.x*uvRect.width;
+	uvRect.top = currentImage.y*uvRect.height;
+}
+
+void Animation::Update( float deltaTime)
+{
+	totalTime += deltaTime;
+	if (totalTime >= switchTime)
+	{
+		totalTime -= switchTime;
+		currentImage.x++;
+		if (currentImage.x >= imageCount.x)
+		{
+			currentImage.x = 0;
+			currentImage.y++;
+		}
+		if (currentImage.y >= imageCount.y)
+		{
+			currentImage.y = 0;
+
 		}
 	}
 	
@@ -81,8 +107,9 @@ int main()
 	            window.close();
 	    }
 
-		animation.Update(0, deltaTime);
+		//animation.UpdateRow(0, deltaTime);
 		player.setTextureRect(animation.uvRect);
+		animation.Update(deltaTime);
 
 		window.clear();
 	    window.draw(player);
