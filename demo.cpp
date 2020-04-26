@@ -1,9 +1,6 @@
 #include "gr_manager.h"
-#include "gr_manager.cpp"
 #include "script_manager.h"
-#include "script_manager.cpp"
 #include "data_storage.h"
-#include "data_storage.cpp"
 
 
 const float dt = 0.5;
