@@ -1,6 +1,6 @@
 #ifndef PHYSICSMANAGER_H
 #define PHYSICSMANAGER_H
-#include "game_object.h"
+#include "component.h"
 
 class PhysicsManager
 {
