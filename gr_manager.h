@@ -1,6 +1,6 @@
 #ifndef GRAPHICSMANAGER_H
 #define GRAPHICSMANAGER_H
-#include "game_object.h"
+#include "component.h"
 
 class GraphicsManager
 {
