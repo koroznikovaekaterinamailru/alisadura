@@ -1,6 +1,6 @@
 #ifndef SCRIPTS_H
 #define SCRIPTS_H
-#include "game_object.h"
+#include "component.h"
 
 class ScriptManager
 {
