@@ -1,6 +1,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 #include "component.h"
+#include <typeinfo>
+#include "gr_manager.h"
+#include "script_manager.h"
 
 class GameObjectComponent;
 
@@ -8,17 +11,30 @@ class GameObject
 {
     public:
         sf::Vector2f position;
+        //std::string id_in_data_storage;  // it's not good
         void setPosition(float x, float y)
         {
             position = {x, y};
         }
 
         template <typename T>
-        void addComponent()//добавление новой компоненты для определённого GameObject 
+        void addComponent()//добавление новой компоненты для определённого GameObject
         {
             T* obj = new T;
             components.push_back(obj);
             components[components.size() - 1]->owner = this;
+
+            if (typeid(T).name() == typeid(Renderer).name())
+            {
+                GraphicsManager* GrManager = GraphicsManager::getInstance();
+                GrManager -> addObject(obj);
+            }
+            else if (typeid(T).name() == typeid(Script).name())
+            {
+                ScriptManager* script_manager = ScriptManager::getInstance();
+                script_manager -> addScript(obj);
+            }
+
         }
 
         template <typename T>
@@ -27,14 +43,14 @@ class GameObject
             std::string name = typeid(T).name();
             for (GameObjectComponent* c: components)
             {
-                if (c->name == typeid(T).name())            
+                if (c->name == typeid(T).name())
                 {
-                    return static_cast<T*>(c);                   
+                    return static_cast<T*>(c);
                 }
-                return NULL; 
-            } 
-        }; 
-        
+                return NULL;
+            }
+        };
+
         template <typename T>
         void removeComponent()
         {
@@ -48,9 +64,9 @@ class GameObject
                 }
             }
         }
-    
+
     private:
-        std::vector<GameObjectComponent*> components; 
+        std::vector<GameObjectComponent*> components;
 };
 
 #endif // GAMEOBJECT_H
