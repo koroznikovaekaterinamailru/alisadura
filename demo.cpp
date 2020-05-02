@@ -1,9 +1,5 @@
 #include "gr_manager.h"
-#include "script_manager.h"
 #include "data_storage.h"
-
-
-const float dt = 0.5;
 
 int main()
 {
@@ -19,13 +15,15 @@ int main()
     hero.getComponent<Renderer>()->createSprite();
     hero.setPosition(300,300);
     dataStorage->createObject("hero", &hero);
+    //std::cout<<"hero added"<<std::endl;*/
 
     GameObject monster;
     monster.addComponent<Renderer>();
     monster.getComponent<Renderer>()->loadTexture("monster.jpg");
     monster.getComponent<Renderer>()->createSprite();
-    monster.setPosition(600,100);
+    monster.setPosition(300,100);
     dataStorage->createObject("monster", &monster);
+    //std::cout<<"monster added"<<std::endl;
 
     sf::Event event;
     while (window.isOpen())
@@ -35,11 +33,13 @@ int main()
         GrManager->drawAllObjects(window);
         window.display();
 
+        //std::cout<<"window is displayed"<<std::endl;
+
         while (window.pollEvent(event))
 	    {
             if (event.type == sf::Event::Closed){
                 window.close();
-            }	   
+            }
 	    }
     }
 
