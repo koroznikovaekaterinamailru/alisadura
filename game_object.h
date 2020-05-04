@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include "gr_manager.h"
 #include "script_manager.h"
+#include "physics_manager.h"
 
 class GameObjectComponent;
 
@@ -11,7 +12,6 @@ class GameObject
 {
     public:
         sf::Vector2f position;
-        //std::string id_in_data_storage;  // it's not good
         void setPosition(float x, float y)
         {
             position = {x, y};
@@ -29,10 +29,15 @@ class GameObject
                 GraphicsManager* GrManager = GraphicsManager::getInstance();
                 GrManager -> addObject(obj);
             }
-            else if (typeid(T).name() == typeid(Script).name())
+            else if (std::is_base_of<Script, T>())
             {
-                ScriptManager* script_manager = ScriptManager::getInstance();
-                script_manager -> addScript(obj);
+                ScriptManager* ScrManager = ScriptManager::getInstance();
+                ScrManager -> addScript(obj);
+            }
+            else if (std::is_base_of<Collider, T>())
+            {
+                PhysicsManager* PhManager = PhysicsManager::getInstance();
+                PhManager -> addCollider(obj);
             }
 
         }
