@@ -21,13 +21,7 @@
             {
                 name = typeid(*this).name();
             };
-            void draw(sf::RenderWindow& window)
-            {
-                float x;
-                float y;
-                sprite.setPosition(x, y);
-                window.draw(sprite);
-            };
+            void draw(sf::RenderWindow& window);
             void loadTexture(std::string textureName)
             {
                 texture.loadFromFile(textureName);
@@ -47,16 +41,16 @@
     };
 
     class Collider: public GameObjectComponent
-    {   
+    {
         public:
             Collider();
             bool isCollision();
-            float width;//ширина прямоугольника,в котором сожержится объект
-            float height;//высота прямоугольника,в котором сожержится объект
+            float width;//ширина прямоугольника,в котором содержится объект
+            float height;//высота прямоугольника,в котором содержится объект
             float x;
             float y;
         private:
-            std::vector<std::vector <float> > object_coordinate; //(координаты прямоугольника,в котором сожержится объект)
+            std::vector<std::vector <float> > object_coordinate; //(координаты прямоугольника,в котором содержится объект)
     };
 
     class Script : public GameObjectComponent
