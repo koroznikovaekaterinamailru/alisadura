@@ -6,6 +6,7 @@ class GraphicsManager
 {
     public:
         static GraphicsManager* getInstance();
+        void update(float dt);
         void addObject(GameObjectComponent* addingOfRenderer);
         void removeObject(GameObjectComponent* removingOfRenderer);
         void drawAllObjects(sf::RenderWindow& window);
