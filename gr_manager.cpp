@@ -8,6 +8,14 @@ GraphicsManager* GraphicsManager::getInstance()
 }
 GraphicsManager* GraphicsManager::instance = NULL;
 
+void GraphicsManager::update(float dt)
+{
+    for (Renderer* renderer : drawable_obj)
+    {
+        renderer -> update(dt);
+    }
+};
+
 void GraphicsManager::addObject(GameObjectComponent* addingOfRenderer)
 {
     drawable_obj.push_back(static_cast<Renderer*>(addingOfRenderer));
@@ -32,3 +40,4 @@ void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
     }
     window.display();
 };
+
