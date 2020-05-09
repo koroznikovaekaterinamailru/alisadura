@@ -6,59 +6,10 @@
 const float dt = 0.5;
 
 
-class KeyboardMove: public Script
-{
-public:
-    float speed = 1;
-
-    KeyboardMove()
-    {
-        name = typeid(*this).name();
-    }
-
-    void update(float dt)
-    {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-        {
-            owner->position.x += speed * dt;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-        {
-            owner->position.x -= speed * dt;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-        {
-            owner->position.y += speed * dt;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            owner->position.y -= speed * dt;
-        }
-    }
-};
-
-class MonsterMove: public Script
-{
-public:
-    float speed = 0.5;
-    MonsterMove()
-    {
-        name = typeid(*this).name();
-    }
-    void update(float dt)
-    {
-        owner->position.x += speed * dt;
-        owner->position.y += speed * dt;
-        if ((owner->position.x > 720) || (owner->position.x < 0))
-            owner->position.x -= speed * dt;
-        if ((owner->position.y > 720) || (owner->position.y < 0))
-            owner->position.y -= speed * dt;
-    }
-};
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(720, 720), "girrrrrls");
+    sf::RenderWindow window(sf::VideoMode(720, 720), "girrrrrls", sf::Style::Close | sf::Style::Resize);
     DataStorage* dataStorage = DataStorage::getInstance();
     GraphicsManager* GrManager = GraphicsManager::getInstance();
     ScriptManager* ScrManager = ScriptManager::getInstance();
@@ -82,7 +33,20 @@ int main()
     dataStorage->createObject("monster", &monster);
     //std::cout<<"monster added"<<std::endl;
 
+
+    GameObject explosion;
+    explosion.addComponent<Renderer>();
+    explosion.getComponent<Renderer>()->loadTexture("explosion.png");
+    explosion.setPosition(200,100);
+    dataStorage->createObject("explosion", &explosion);
+    explosion.getComponent<Renderer>()->createSprite();
+    explosion.getComponent<Renderer>()->createAnimation(explosion.getComponent<Renderer>()->getTexture(), sf::Vector2f(4, 4), 0.1f, dt);
+
+    float deltaTime = 0.0f;
+    sf::Clock clock;
+
     sf::Event event;
+
     while (window.isOpen())
 	{
         window.clear(sf::Color(0,0,0));
@@ -90,6 +54,8 @@ int main()
         PhManager->allCollisions();
         window.display();
         ScrManager->update(dt);
+        GrManager->update(dt);
+
 
         while (window.pollEvent(event))
 	    {
