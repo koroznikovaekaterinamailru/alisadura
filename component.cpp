@@ -3,7 +3,7 @@
 #include "game_object.h"
 #include "component.h"
 
-////////////////////////////////////
+
 
 void Renderer::draw(sf::RenderWindow& window)
 {
@@ -11,7 +11,7 @@ void Renderer::draw(sf::RenderWindow& window)
     window.draw(sprite);
 }
 
-////////////////////////////////////
+
 
 Script::Script(){
 
