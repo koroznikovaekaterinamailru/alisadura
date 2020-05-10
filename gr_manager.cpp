@@ -32,4 +32,3 @@ void GraphicsManager::drawAllObjects(sf::RenderWindow& window)
     }
     window.display();
 };
-
