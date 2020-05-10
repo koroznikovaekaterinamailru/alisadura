@@ -1,4 +1,4 @@
-#ifndef COMPONENT_H
+ifndef COMPONENT_H
 #define COMPONENT_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -17,7 +17,6 @@
     class Renderer : public GameObjectComponent //отрисовка
     {
         public:
-            class Animation;
             Renderer()
             {
                 name = typeid(*this).name();
@@ -31,34 +30,15 @@
             {
                 sprite.setTexture(texture);
             };
-            void createSpriteRect(sf::IntRect Rect)
-            {
-                sprite.setTextureRect(Rect);
-            };
             sf::Sprite* getSprite()
             {
                 return &sprite;
             };
 
-            sf::Texture* getTexture()
-            {
-                return &texture;
-            };
-            float totalTime;
-            float switchTime;
-            void createAnimation(sf::Texture* texture, sf::Vector2f imageCount, float switchTime, float deltaTime);
-            
-            virtual void update(float dt) {};
-
-
-
         private:
             sf::Texture texture;
             sf::Sprite sprite;
-            
-
     };
-   
 
     class Collider: public GameObjectComponent
     {
@@ -78,25 +58,7 @@
         public:
             Script();
             virtual void update(float dt) {}
-             bool faceRight;
-     
-    };
-
-
-
-    class Animation : public Renderer
-    {
-    public:
-        Animation(sf::Texture* texture, sf::Vector2f imageCount, float switchTime);
-        ~Animation();
-        sf::IntRect Rect;
-        void UpdateRow(int row, float deltaTime, bool faceRight);
-        void Update(float deltaTime);
-
-    private:
-        sf::Vector2f imageCount;
-        sf::Vector2f currentImage;
-        
     };
 
 #endif // COMPONENT_H
+
