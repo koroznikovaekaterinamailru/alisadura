@@ -4,7 +4,6 @@
 #include <typeinfo>
 #include "gr_manager.h"
 #include "script_manager.h"
-#include "physics_manager.h"
 
 class GameObjectComponent;
 
@@ -33,11 +32,6 @@ class GameObject
             {
                 ScriptManager* ScrManager = ScriptManager::getInstance();
                 ScrManager -> addScript(obj);
-            }
-            else if (std::is_base_of<Collider, T>())
-            {
-                PhysicsManager* PhManager = PhysicsManager::getInstance();
-                PhManager -> addCollider(obj);
             }
 
         }
@@ -75,3 +69,4 @@ class GameObject
 };
 
 #endif // GAMEOBJECT_H
+
