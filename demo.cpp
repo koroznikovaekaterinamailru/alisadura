@@ -5,7 +5,7 @@
 #include "cmath"
 
 
-const float dt = 0.1;
+const float dt = 0.5;
 
 
 class Controller: public Script
