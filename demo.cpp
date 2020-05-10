@@ -8,12 +8,12 @@
 const float dt = 0.5;
 
 
-class Controller: public Script
+class PlayerKeyboardMove: public Script
 {
 public:
-    float speed = 1;
+    float speed = 2;
 
-    Controller()
+    PlayerKeyboardMove()
     {
         name = typeid(*this).name();
     }
@@ -39,13 +39,14 @@ public:
     }
 };
 
-class MonsterAI: public Script
+class MonsterMove: public Script
 {
     public:
-        float speed = 1;
+        float vel_y = 1;
+        float vel_x =1;
         float cooldown = 0;
 
-    MonsterAI()
+    MonsterMove()
     {
         name = typeid(*this).name();
     }
@@ -56,22 +57,31 @@ class MonsterAI: public Script
 
         GameObject* hero = data_storage->getObject("hero");
 
-        float rx = hero->position.x - owner->position.x;
-        float ry = hero->position.y - owner->position.y;
+        float rx = owner->position.x;
+        float ry =  owner->position.y;
+        float hx = hero->position.x;
+        float hy = hero->position.y;
 
-        float distance = sqrt(rx*rx + ry*ry);
+        float distance = sqrt((rx-hx)*(rx-hx) + (ry-hy)*(ry-hy));
 
         rx /= distance;
         ry /= distance;
 
-        owner->position.x += rx * speed * dt;
-        owner->position.y += ry * speed * dt;
+        owner->position.x += vel_x * dt;
+        owner->position.y += vel_y * dt;
+
+        if ((owner->position.x > 670) or (owner->position.x < 0))
+            vel_x = - vel_x;
+        if ((owner->position.y > 670) or (owner->position.y < 0))
+           vel_y = - vel_y;
 
         cooldown -= dt;
-        if ((cooldown <= 0) and (distance <= 20))
+        if ((cooldown <= 0) and (distance <= 40))
         {
             std::cout << "collision" << std::endl;
             cooldown = 5;
+            vel_x = - vel_x;
+            vel_y = - vel_y;
         }
     }
 };
@@ -89,7 +99,7 @@ int main()
     hero.getComponent<Renderer>()->loadTexture("hero_s.png");
     hero.getComponent<Renderer>()->createSprite();
     hero.setPosition(300,300);
-    hero.addComponent<Controller>();
+    hero.addComponent<PlayerKeyboardMove>();
     dataStorage->createObject("hero", &hero);
 
     GameObject monster;
@@ -97,23 +107,24 @@ int main()
     monster.getComponent<Renderer>()->loadTexture("monster_s.png");
     monster.getComponent<Renderer>()->createSprite();
     monster.setPosition(600,100);
-    monster.addComponent<MonsterAI>();
+    monster.addComponent<MonsterMove>();
     dataStorage->createObject("monster", &monster);
 
     sf::Event event;
     while (window.isOpen())
-	{
+    {
         window.clear(sf::Color(0,0,0));
         GrManager->drawAllObjects(window);
+        PhManager->allCollisions();
         window.display();
         ScrManager->update(dt);
 
         while (window.pollEvent(event))
-	    {
+        {
             if (event.type == sf::Event::Closed){
                 window.close();
             }
-	    }
+        }
     }
 
     delete dataStorage;
