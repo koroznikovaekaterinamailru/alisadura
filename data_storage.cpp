@@ -1,7 +1,7 @@
 #include "data_storage.h"
 
 DataStorage* DataStorage::getInstance(){
-    
+
     if(!instance){
         instance = new DataStorage();
     }
@@ -13,7 +13,7 @@ bool DataStorage::createObject(std::string name , GameObject* object)
 {
     if(objects[name] = object)
       	return true;
-    else 
+    else
     	return false;
 }
 
@@ -32,3 +32,4 @@ GameObject* DataStorage::getObject(std::string name)
 {
     return objects[name];
 }
+
