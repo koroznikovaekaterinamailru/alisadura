@@ -26,10 +26,10 @@ void PhysicsManager::removeCollider(GameObjectComponent* removingOfCollider)
 }
 
 bool PhysicsManager::isCollision(Collider* object1 , Collider* object2)
-{       
+{
     bool XColl=false;
     bool YColl=false;
-    if(((*object1).x + (*object1).width == (*object2).x) || ((*object2).x + (*object2).width == (*object1).x)) 
+    if(((*object1).x + (*object1).width == (*object2).x) || ((*object2).x + (*object2).width == (*object1).x))
         XColl = true;
 
     if (((*object1).y + (*object1).height == (*object2).y) || ((*object2).y + (*object2).height == (*object2).y))
@@ -38,6 +38,7 @@ bool PhysicsManager::isCollision(Collider* object1 , Collider* object2)
     }
     if (XColl&YColl)
     {
+        std::cout << "collision" << std::endl;
         return true;
     }
     return false;
