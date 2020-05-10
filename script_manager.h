@@ -5,7 +5,7 @@
 class ScriptManager
 {
 	public:
-        static ScriptManager* getInstance();        
+        static ScriptManager* getInstance();
 	    void update(float dt);
 	    void addScript(GameObjectComponent* addingOfScript);
 	    void removeScript(GameObjectComponent* removingOfScript);
