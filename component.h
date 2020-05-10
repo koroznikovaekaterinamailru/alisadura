@@ -1,4 +1,4 @@
-ifndef COMPONENT_H
+#ifndef COMPONENT_H
 #define COMPONENT_H
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -61,4 +61,3 @@ ifndef COMPONENT_H
     };
 
 #endif // COMPONENT_H
-
