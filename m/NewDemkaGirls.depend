@@ -1,0 +1,90 @@
+# depslib dependency file v1.0
+1590079991 source:/home/osboxes/Desktop/NewDemkaGirls/component.cpp
+	"component.h"
+
+1590156212 /home/osboxes/Desktop/NewDemkaGirls/component.h
+	<string>
+
+1590079991 source:/home/osboxes/Desktop/NewDemkaGirls/data_storage.cpp
+	"data_storage.h"
+	"game_object.h"
+	<iostream>
+	<string>
+
+1590079991 /home/osboxes/Desktop/NewDemkaGirls/data_storage.h
+	<vector>
+	<string>
+
+1590300841 /home/osboxes/Desktop/NewDemkaGirls/game_object.h
+	<string>
+	<map>
+	"singleton.h"
+	<type_traits>
+	<typeinfo>
+
+1590079991 /home/osboxes/Desktop/NewDemkaGirls/singleton.h
+	"graphics.h"
+	"scripts.h"
+	"data_storage.h"
+	"physics.h"
+
+1590303546 /home/osboxes/Desktop/NewDemkaGirls/graphics.h
+	<SFML/Graphics.hpp>
+	<string>
+	"component.h"
+
+1590079991 /home/osboxes/Desktop/NewDemkaGirls/scripts.h
+	<vector>
+	<iostream>
+	"component.h"
+
+1590160959 /home/osboxes/Desktop/NewDemkaGirls/physics.h
+	<SFML/Graphics.hpp>
+	<string>
+	"component.h"
+
+1590309700 source:/home/osboxes/Desktop/NewDemkaGirls/game.cpp
+	<iostream>
+	<map>
+	<vector>
+	<string>
+	<SFML/Graphics.hpp>
+	<type_traits>
+	"user_api.h"
+	<cmath>
+
+1590302366 /home/osboxes/Desktop/NewDemkaGirls/user_api.h
+	"game_object.h"
+
+1590079991 source:/home/osboxes/Desktop/NewDemkaGirls/game_object.cpp
+	"game_object.h"
+
+1590310680 source:/home/osboxes/Desktop/NewDemkaGirls/graphics.cpp
+	"graphics.h"
+	"game_object.h"
+	<sstream>
+
+1590310132 source:/home/osboxes/Desktop/NewDemkaGirls/physics.cpp
+	<SFML/Graphics.hpp>
+	"physics.h"
+	"game_object.h"
+	"math.h"
+	<iostream>
+	<vector>
+	<iterator>
+	<string>
+
+1590079991 source:/home/osboxes/Desktop/NewDemkaGirls/scripts.cpp
+	"scripts.h"
+	<algorithm>
+	"game_object.h"
+
+1590301154 source:/home/osboxes/Desktop/NewDemkaGirls/singleton.cpp
+	"singleton.h"
+
+1590302312 source:/home/osboxes/Desktop/NewDemkaGirls/user_api.cpp
+	"user_api.h"
+
+1590151759 source:/home/osboxes/Desktop/NewDemkaGirls/main.cpp
+	<SFML/Graphics.hpp>
+

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="NewDemkaGirls" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/NewDemkaGirls" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/NewDemkaGirls" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="sfml-graphics" />
+					<Add library="sfml-window" />
+					<Add library="sfml-system" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="1.h" />
+		<Unit filename="PlayerSprite2.png" />
+		<Unit filename="airadventurelevel1.png" />
+		<Unit filename="airadventurelevel2.png" />
+		<Unit filename="airadventurelevel3.png" />
+		<Unit filename="airadventurelevel4.png" />
+		<Unit filename="back1.jpg" />
+		<Unit filename="back2" />
+		<Unit filename="back2.png" />
+		<Unit filename="back3.png" />
+		<Unit filename="cb.bmp" />
+		<Unit filename="client_app.h" />
+		<Unit filename="component.cpp" />
+		<Unit filename="component.h" />
+		<Unit filename="cristal.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-blue.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-green.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-grey.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-orange.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-pink.png" />
+		<Unit filename="crystal-qubodup-ccby3-16-yellow.png" />
+		<Unit filename="crystal-qubodup-ccby3-32-blue.png" />
+		<Unit filename="crystal-qubodup-ccby3-32-green.png" />
+		<Unit filename="crystal-qubodup-ccby3-32-grey.png" />
+		<Unit filename="crystal-qubodup-ccby3-32-orange.png" />
+		<Unit filename="crystal-qubodup-ccby3-32-yellow.png" />
+		<Unit filename="data_storage.cpp" />
+		<Unit filename="data_storage.h" />
+		<Unit filename="event_manager.h" />
+		<Unit filename="fly.png" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game_object.cpp" />
+		<Unit filename="game_object.h" />
+		<Unit filename="graphics.cpp" />
+		<Unit filename="graphics.h" />
+		<Unit filename="horse.png" />
+		<Unit filename="horse1.png" />
+		<Unit filename="horse2.png" />
+		<Unit filename="main.cpp" />
+		<Unit filename="physics.cpp" />
+		<Unit filename="physics.h" />
+		<Unit filename="player_big.png" />
+		<Unit filename="rock.png" />
+		<Unit filename="scripts.cpp" />
+		<Unit filename="scripts.h" />
+		<Unit filename="singleton.cpp" />
+		<Unit filename="singleton.h" />
+		<Unit filename="sizeLevel3(4).jpg" />
+		<Unit filename="tile set01.png" />
+		<Unit filename="user_api.cpp" />
+		<Unit filename="user_api.h" />
+		<Unit filename="white_horse.png" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
